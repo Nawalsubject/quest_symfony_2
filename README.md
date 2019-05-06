@@ -20,9 +20,9 @@ Tu as créé l'index de ta page blog. Potentiellement où se trouvera tous tes f
 
 Créer un nouveau contrôleur DefaultController
 
-Créer une méthode index() et une route en annotation nommée app_index qui devra répondre à une requête sur l'url '/' (la page par défaut de ton site finalement).
+Créer une méthode index() et une route en annotation nommée app_index qui devra répondre à une requête sur l'url / (la page par défaut de ton site finalement).
 
-La méthode devra afficher un titre <h1> contenant "Bienvenue sur mon blog" grâce à un template Twig nommé default.html.twig à la racine, qui étendra base.html.twig.
+La méthode devra afficher un titre h1 contenant "Bienvenue sur mon blog" grâce à un template Twig nommé default.html.twig à la racine, qui étendra base.html.twig.
 
 Critères de validation
 Il y a un fichier DefaultController.php dans src/Controller de l'arborescence.
