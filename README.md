@@ -35,6 +35,7 @@ Critères de validation :
 - L'URL http://localhost:8000/ est fonctionnelle, le titre s'affiche. :)
 
  # quest_symfony_4
+4 - Symfony : Le routing avancé
  
  Crée ta propre route
 Crée une route blog/show/{slug} permettant de charger une vue affichant ce slug dynamiquement sous forme de titre, dans une balise h1. Le slug en question ne devra contenir que des caractères entre a et z (minuscules uniquement), des chiffres de 0 à 9 ou des tirets -. La route devra être reliée à une méthode show du BlogController. Avant d'appeler la vue Twig, cette méthode devra remplacer tous les tirets du slug par des espaces, puis passer la première lettre de chaque mot en majuscule (regarde la fonction ucwords) pour avoir un titre d'article lisible. Tu trouveras des exemples dans les critères de validation. Si aucun slug n'est fourni, il faudra afficher par défaut "Article Sans Titre" dans la balise h1.
