@@ -8,10 +8,11 @@ Le défi est simple : Tu initialiseras un dépôt Git hébergé sur GitHub avec 
 
 L'URL d'une release GitHub ressemble à ça, avec ton propre USERNAME : https://github.com/USER_NAME/blog/tree/q_new
 
-Critères de validation
-Le dépôt contient uniquement les dossiers suivants : assets/, bin/, config/, public/, src/, templates/, tests/, translations/, var/ et quelques autres fichiers (.gitignore, composer.json, etc.).
-Le dépôt ne contient évidement pas les répertoire .idea/ et vendor/.
-Le correcteur peux installer le projet sur sa machine (voir étape bonus) et la page "Welcome to Symfony" s'affiche sur la route / en accédant à l'url http://localhost:8000/.
+Critères de validation :
+
+- Le dépôt contient uniquement les dossiers suivants : assets/, bin/, config/, public/, src/, templates/, tests/, translations/, var/ et quelques autres fichiers (.gitignore, composer.json, etc.).
+- Le dépôt ne contient évidement pas les répertoire .idea/ et vendor/.
+- Le correcteur peux installer le projet sur sa machine (voir étape bonus) et la page "Welcome to Symfony" s'affiche sur la route / en accédant à l'url http://localhost:8000/.
 
 # quest_symfony_3
 
@@ -24,10 +25,26 @@ Créer une méthode index() et une route en annotation nommée app_index qui dev
 
 La méthode devra afficher un titre h1 contenant "Bienvenue sur mon blog" grâce à un template Twig nommé default.html.twig à la racine, qui étendra base.html.twig.
 
-Critères de validation
-Il y a un fichier DefaultController.php dans src/Controller de l'arborescence.
-Ce fichier comporte une classe DefaultController et étend le AbstractController de base de Symfony.
-La route sur / est faite en annotation et est nommée app_index.
-Le méthode index() du contrôleur se finit par un $this->render('path_vers_un_twig');.
-Le fichier Twig default.html.twig étend base.html.twig et comprend un titre h1 "Bienvenue sur mon blog".
-L'URL http://localhost:8000/ est fonctionnelle, le titre s'affiche. :)
+Critères de validation :
+
+- Il y a un fichier DefaultController.php dans src/Controller de l'arborescence.
+- Ce fichier comporte une classe DefaultController et étend le AbstractController de base de Symfony.
+- La route sur / est faite en annotation et est nommée app_index.
+- Le méthode index() du contrôleur se finit par un $this->render('path_vers_un_twig');.
+- Le fichier Twig default.html.twig étend base.html.twig et comprend un titre h1 "Bienvenue sur mon blog".
+- L'URL http://localhost:8000/ est fonctionnelle, le titre s'affiche. :)
+
+ # quest_symfony_4
+ 
+ Crée ta propre route
+Crée une route blog/show/{slug} permettant de charger une vue affichant ce slug dynamiquement sous forme de titre, dans une balise h1. Le slug en question ne devra contenir que des caractères entre a et z (minuscules uniquement), des chiffres de 0 à 9 ou des tirets -. La route devra être reliée à une méthode show du BlogController. Avant d'appeler la vue Twig, cette méthode devra remplacer tous les tirets du slug par des espaces, puis passer la première lettre de chaque mot en majuscule (regarde la fonction ucwords) pour avoir un titre d'article lisible. Tu trouveras des exemples dans les critères de validation. Si aucun slug n'est fourni, il faudra afficher par défaut "Article Sans Titre" dans la balise h1.
+
+Critères de validation :
+
+- La route est correctement définie, en annotations, et est reliée à la méthode show() de BlogController.
+Une vue templates/blog/show.html.twig est créée.
+- La route blog/show/mon-super-article affiche bien une vue avec en titre "Mon Super Article" dans un h1.
+- La route blog/show/article-du-1-janvier-1970 affiche bien une vue avec en titre "Article Du 1 Janvier 1970" dans un h1.
+- La route blog/show/ affiche bien une vue avec "Article Sans Titre" dans un h1.
+- La route blog/show/MonArticle n'affiche rien (erreur 404) car le paramètre contient des majuscules.
+- La route blog/show/mon_article n'affiche rien (erreur 404) car le paramètre contient un underscore.
