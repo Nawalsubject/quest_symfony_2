@@ -54,6 +54,7 @@ Crée deux entités Category et Article.***
 *Category*
 - id : integer (Clé primaire)
 - name : string (Obligatoire, valeur max 100).
+
 *Article*
 - id : integer (Clé primaire)
 - title : string (Obligatoire)
