@@ -71,6 +71,7 @@ Pour le moment ces deux entités ne sont pas liées. Tu dois également mettre �
 06 - Symfony : Relation "Many-To-One" avec Doctrine
 
 ***Crée la relation ManyToOne***
+
 Ce challenge sera très simple car tu as besoin des quêtes suivantes pour mettre en place des choses plus complexes. Il s'agira uniquement de contrôler visuellement le code de la classe Article. Cette dernière doit être conforme à ce qui est expliqué dans la quête. C’est à dire, une classe Article.php qui contient une propriété category paramétrée comme il se doit dans ses annotation avec les getter et setter associés.
 
 ***Critères de validation :***
