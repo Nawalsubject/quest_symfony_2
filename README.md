@@ -57,7 +57,8 @@ Crée deux entités Category et Article.***
 *Article*
 - id : integer (Clé primaire)
 - title : string (Obligatoire)
-- Tcontent : text (Obligatoire)
+- content : text (Obligatoire)
+
 Pour le moment ces deux entités ne sont pas liées. Tu dois également mettre à jour ta base de données en conséquence.
 
 ***Critères de validation :***
