@@ -53,7 +53,7 @@ class Category
     /**
      * @return Collection|Article[]
      */
-    public function getArticles() :Collection
+    public function getArticles(): Collection
     {
         return $this->articles;
     }
@@ -82,7 +82,7 @@ class Category
             $this->articles->removeElement($article);
             if ($article->getCategory() === $this) {
                 $article->setCategory(null);
-                }
+            }
         }
 
         return $this;

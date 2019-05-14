@@ -43,10 +43,7 @@ class BlogController extends AbstractController
                 ->createNotFoundException('No slug has been sent to find an article in article\'s table.');
         }
 
-        $slug = preg_replace(
-            '/-/',
-            ' ', ucwords(trim(strip_tags($slug)), "-")
-        );
+        $slug = preg_replace('/-/', ' ', ucwords(trim(strip_tags($slug)), "-"));
 
         $article = $this->getDoctrine()
             ->getRepository(Article::class)
