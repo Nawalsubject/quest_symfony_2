@@ -80,3 +80,22 @@ Ce challenge sera très simple car tu as besoin des quêtes suivantes pour mettr
 - Les annotations ManyToOne et JoinColumn sont présentes et correctement paramétrées (nullable=false, targetEntity)
 - Le use nécessaire pour les annotations @ORM est en place.
 - Ton code devra être disponible sur un repository GitHub
+
+# quest_symfony_8
+08 - Symfony : Les relations bidirectionnelles avec Doctrine
+
+***Titre du challenge***
+Votre mission, si vous l'acceptez, sera de créer une relation bidirectionnelle entre tes articles et tes catégories.
+
+Tu devras créer en BDD plusieurs articles (une dizaine) et plusieurs catégories (environ 3).
+
+Reprend la méthode showByCategory(string $categoryName) et modifie la récuperation en 2 temps des articles d’une categorie en utilisant l’appel à $category->getArticles().
+
+Exceptionnellement, tu peu conserver ton vieux code en commentaire pour comparer les 2 techniques.
+
+***Critères de validation***
+- Rendre la quête avec un repository GitHub
+- Avoir les deux classes Article et Category
+- Les annotations inversedBy et mappedBy sont présentes
+- Les méthodes addArticle() et removeArticle() sont présentes dans la classe Category
+- Utiliser les méthodes getArticles() et getCategory()
