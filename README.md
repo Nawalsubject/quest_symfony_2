@@ -81,10 +81,33 @@ Ce challenge sera très simple car tu as besoin des quêtes suivantes pour mettr
 - Le use nécessaire pour les annotations @ORM est en place.
 - Ton code devra être disponible sur un repository GitHub
 
+# quest_symfony_7
+07 - Symfony : Récupérer des données stockées avec Doctrine
+
+***FindBy() : récupérer plusieurs objets avec des filtres***
+
+Tu as utilisé pour le moment les méthodes findAll() et findOneBy(). Il est temps pour toi de mettre en pratique la méthode findBy(). Le principe reste identique à la méthode findOneBy(), mais au lieu de récupérer strictement un seul tuple, tu en récupères plusieurs liés à une catégorie donnée. De plus n’oublie pas, tu peux ajouter d’autres paramètres à cette méthode, très utile pour trier ou limiter tes résultats.
+
+- Crée une nouvelle méthode dans la classe BlogController nommée showByCategory(string $categoryName). Celle-ci doit prendre prendre en paramètre le nom d’une catégorie de type string.
+- Utilise la méthode findOneBy() sur le repository Category::class afin de récupérer l'objet Category correspondant.
+- Dans la même méthode, à partir de l’objet Catégory fraîchement récupéré, appel la méthode findBy() sur le repository Article::class afin de parcourir tous les articles liés.
+- Enfin, ajoutes une limite de 3 articles et un tri par id décroissant à la récupération des articles.
+- Crée une nouvelle vue templates/blog/category.html.twig qui affichera tous les articles récupérés avec leurs id, titres et contenus.
+
+***Critères de validation***
+- Une nouvelle méthode showByCategory(string $categoryName) a été créée dans le controller BlogController.
+- La route de cette méthode sera sous la forme : @Route("/category/{category}", name="show_category").
+- Cette méthode retourne un tableau d'articles récupéré par une méthode de type findBy(), en limitant le nombre de résultats à 3, le tout trié par id décroissant.
+- Un nouveau fichier a été créé templates/blog/category.html.twig.
+- Ce fichier bouclera sur tous les articles afin d'afficher l'id, le titre et le contenu de chaque itération.
+- L'URL http://localhost:8000/blog/category/javascript est fonctionnelle et renvoie bien tous les articles liés à la catégorie Javascript, ajoutée en début de quête.
+- Ton code devra être disponible sur un repository GitHub
+
 # quest_symfony_8
 08 - Symfony : Les relations bidirectionnelles avec Doctrine
 
 ***Titre du challenge***
+
 Votre mission, si vous l'acceptez, sera de créer une relation bidirectionnelle entre tes articles et tes catégories.
 
 Tu devras créer en BDD plusieurs articles (une dizaine) et plusieurs catégories (environ 3).
