@@ -116,9 +116,22 @@ Reprend la méthode showByCategory(string $categoryName) et modifie la récupera
 
 Exceptionnellement, tu peu conserver ton vieux code en commentaire pour comparer les 2 techniques.
 
-***Critères de validation***
+***Critères de validation :***
 - Rendre la quête avec un repository GitHub
 - Avoir les deux classes Article et Category
 - Les annotations inversedBy et mappedBy sont présentes
 - Les méthodes addArticle() et removeArticle() sont présentes dans la classe Category
 - Utiliser les méthodes getArticles() et getCategory()
+
+# quest_symfony_9
+09 - Symfony : Le param converter
+
+***Utilise un param converter***
+
+Pour ton projet Blog, reprend dans BlogController la méthode showByCategory(string $categoryName). Tu vas devoir utiliser un param converter pour te retourner un objet Category en fonction du nom de la catégorie transmis par la route. La vue associée doit afficher comme précedement le nom de la catégorie correspondante ainsi que la liste des articles associés.
+
+***Critères de validation :***
+- Dans blogController, la méthode showByCategory() permet de récupérer un objet Category via le param converter, à partir d'un name en paramètre de route,
+- Dans showByCategory(), les articles associés à la categorie sont toujours récupérés par 
+l’appel à $category->getArticles();,
+- La méthode rend une vue affichant le nom de la catégorie et ses articles associés.
