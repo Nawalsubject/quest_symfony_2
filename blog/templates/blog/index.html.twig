@@ -4,23 +4,36 @@
 {% block title %}All articles{% endblock %}
 
 {% block body %}
-    <h1>All articles from article's table : </h1>
+    <h1 class="mt-5">All articles from article's table : </h1>
     {% for article in articles %}
-        <div>
-            <h2>{{ loop.index }} / {{ article.title }} - Category : {{ article.category.name }}</h2>
-            <p>{{ article.content }}</p>
+        <div class="card my-4">
+            <h5 class="card-header">{{ loop.index }} / {{ article.title }}</h5>
+            <div class="card-body">
+                <h5 class="card-title">Category : {{ article.category.name }}</h5>
+                <p class="card-text">{{ article.content }}</p>
+            </div>
         </div>
     {% else %}
         Aucun article trouvé.
     {% endfor %}
-    <a href="{{ path('app_index') }}">
-        Back to homepage.
-    </a>
+
+    <div class="row">
+
+    <div class="col-12 my-2">
+    <a href="{{ path('app_index') }}"><button type="button" class="btn btn-secondary">Back to homepage.</button></a>
+    </div>
+
+    <div class="col-12 my-2">
     <a href="{{ path('blog_show', { 'slug': "javascript-vs-php" }) }}">
-        Testing show() method from BlogController with a real article s slug.
+        <button type="button" class="btn btn-secondary">Testing show() method from BlogController with a real article s slug.</button>
     </a>
-    <br>
+    </div>
+
+    <div class="col-12 my-2">
     <a href="{{ path('blog_index') }}">
-        Testing index() method from BlogController to view all articles.
+        <button type="button" class="btn btn-secondary"> Testing index() method from BlogController to view all articles.</button>
     </a>
+    </div>
+
+    </div>
 {% endblock %}

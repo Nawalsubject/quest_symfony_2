@@ -3,18 +3,19 @@
 
 {% block title %}{{ slug }}{% endblock %}
 
-{% block stylesheets %}{% endblock %}
-
 {% block body %}
 
-    <div>
         <h1>Real article's title : {{ article.title }}</h1>
-        <h2>Category : {{ article.category.name }}</h2>
-        <p>{{ article.content }}</p>
+
+    <div class="card my-2">
+        <h5 class="card-header">Category : {{ article.category.name }}</h5>
+        <div class="card-body">
+            <p class="card-text">{{ article.content }}</p>
+        </div>
     </div>
 
     <a href="{{ path('app_index') }}">
-        Back to homepage.
+        <button type="button" class="btn btn-secondary">Back to homepage.</button>
     </a>
 
 {% endblock %}
