@@ -74,6 +74,11 @@ class BlogController extends AbstractController
      */
     public function showByCategory(Category $category): Response
     {
+        if (!$category) {
+            throw $this
+                ->createNotFoundException('No category has been sent to find a category in article\'s table.');
+        }
+
         $articles = $category->getArticles();
 
         return $this->render('blog/category.html.twig', ['articles' => $articles, 'category' => $category]);
