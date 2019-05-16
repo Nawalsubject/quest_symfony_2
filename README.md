@@ -135,3 +135,16 @@ Pour ton projet Blog, reprend dans BlogController la méthode showByCategory(str
 - Dans showByCategory(), les articles associés à la categorie sont toujours récupérés par 
 l’appel à $category->getArticles();,
 - La méthode rend une vue affichant le nom de la catégorie et ses articles associés.
+
+# quest_symfony_10
+10 - Symfony : Gardez la “form” !
+
+***Créer des catégories***
+
+Tu dois créer une page contenant un formulaire qui pourra te permettre d’ajouter une catégorie en base de données. À partir des ressources citées plus haut, à toi de définir dans un CategoryController une méthode **add()**. Celle-ci appelera une vue contenant un formulaire pertmettant de saisir les informations à fournir pour créer une nouvelle catégorie. À la soumission du formulaire, les données saisies sont *persistées* en base de données.
+
+***Critères de validation :***
+- La classe App\Form\CategoryType est présente dans le dossier src/Form.
+- La route /category affiche bien le formulaire de création de catégorie.
+- Le formulaire fonctionne (il crée une catégorie).
+- Ton code est présent sur le même dépot github que tes précédentes quêtes Symfony.
