@@ -7,6 +7,7 @@ use App\Form\CategoryType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
 
 class CategoryController extends AbstractController
@@ -18,6 +19,8 @@ class CategoryController extends AbstractController
      */
     public function add(Request $request) : Response
     {
+        $session = new Session();
+
         $category = new Category();
         $form = $this->createForm(CategoryType::class,$category);
         $form->handleRequest($request);
@@ -30,6 +33,11 @@ class CategoryController extends AbstractController
             $categoryManager = $this->getDoctrine()->getManager();
             $categoryManager->persist($category);
             $categoryManager->flush();
+
+            $session->getFlashBag()->add(
+                'success',
+                'The category has been successfully added !'
+            );
 
             return $this->redirectToRoute('category');
         }
