@@ -8,6 +8,7 @@
         {% block stylesheets %}
             {# 'app' must match the first argument to addEntry() in webpack.config.js #}
             {{ encore_entry_link_tags('app') }}
+            <link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.min.css">
 
             <!-- Renders a link tag (if your module requires any CSS)
                  <link rel="stylesheet" href="/build/app.scss"> -->
@@ -17,7 +18,7 @@
     <header>
         {% include 'navbar.html.twig' %}
     </header>
-    <div class="container text-center py-5">
+    <div class="container justify-content-center py-5">
         {% block body %}{% endblock %}
         <!-- ... -->
 

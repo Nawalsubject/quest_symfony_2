@@ -4,16 +4,37 @@
 
 {% block body %}
 
-    <h2 class="mb-5">Add a new category</h2>
+    <h2 class="mb-5 text-center">Add a new category</h2>
     <div class="row justify-content-center">
         {{ form_start(form) }}
         <div class="col-12">
-        {{ form_widget(form) }}
+            {{ form_widget(form) }}
         </div>
-        <div class="col-12">
-        <input type="submit" class="btn btn-secondary btn-lg" value="Add">
+        <div class="col-6">
+            <input type="submit" class="btn btn-secondary btn-lg ml-5" value="Add">
         </div>
         {{ form_end(form) }}
     </div>
+
+    <table class="table table-hover">
+        <thead class="table-warning">
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+        </tr>
+        </thead>
+
+        {% for category in categories %}
+
+            <tbody>
+            <tr>
+                <td>{{ category.id }}</td>
+                <td>{{ category.name }}</td>
+            </tr>
+            </tbody>
+
+        {% endfor %}
+
+    </table>
 
 {% endblock %}

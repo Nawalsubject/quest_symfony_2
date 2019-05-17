@@ -22,6 +22,10 @@ class CategoryController extends AbstractController
         $form = $this->createForm(CategoryType::class,$category);
         $form->handleRequest($request);
 
+        $categories = $this->getDoctrine()
+            ->getRepository(Category::class)
+            ->findAll();
+
         if ($form->isSubmitted()) {
             $categoryManager = $this->getDoctrine()->getManager();
             $categoryManager->persist($category);
@@ -31,7 +35,8 @@ class CategoryController extends AbstractController
         }
 
         return $this->render('category/index.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'categories' => $categories,
         ]);
     }
 }
