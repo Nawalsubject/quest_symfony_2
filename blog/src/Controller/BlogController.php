@@ -15,7 +15,7 @@ class BlogController extends AbstractController
     /**
      * @Route("/blog", name="blog_index")
      */
-    public function index(Request $request) : Response
+    public function index() : Response
     {
         $articles = $this->getDoctrine()
             ->getRepository(Article::class)
