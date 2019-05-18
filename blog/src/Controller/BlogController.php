@@ -94,7 +94,7 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @Route("/blog/tag/{name}", name="blog_show_tags")
+     * @Route("/blog/tag/{name}", name="blog_tag")
      * @param Tag $tag
      * @return Response
      */

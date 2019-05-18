@@ -5,16 +5,18 @@
 
 {% block body %}
 
-        <h1 class="mb-4">In {{ tag.name }} tag</h1>
+    <h1 class="mb-4">In {{ tag.name }} tag</h1>
 
     {% for article in articles %}
-    <div class="card my-2">
-        <h5 class="card-header">{{ article.title }}</h5>
-        <div class="card-body">
-            <p class="card-text">{{ article.content }}</p>
-        </div>
-        <div class="card-footer text-muted">{{ article.category.name }}</div>
-    </div>
+        <a href="{{ path('article_show', {'id': article.id}) }}">
+            <div class="card my-2">
+                <h5 class="card-header">{{ article.title }}</h5>
+                <div class="card-body">
+                    <p class="card-text">{{ article.content }}</p>
+                </div>
+                <div class="card-footer text-muted">{{ article.category.name }}</div>
+            </div>
+        </a>
     {% endfor %}
 
     <a href="{{ path('app_index') }}">
