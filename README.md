@@ -148,3 +148,23 @@ Tu dois créer une page contenant un formulaire qui pourra te permettre d’ajou
 - La route /category affiche bien le formulaire de création de catégorie.
 - Le formulaire fonctionne (il crée une catégorie).
 - Ton code est présent sur le même dépot github que tes précédentes quêtes Symfony.
+
+# ques_symfony_11
+11 - Symfony : Générer un CRUD
+
+***Générons du CRUD***
+Génère le CRUD pour les entités Article.
+
+Une fois le crud créé:
+
+- Crée plusieurs articles (au moins 4),
+- Affiche tous les articles,
+- Modifie plusieurs articles (au moins 2),
+- Efface plusieurs articles (au moins 2)
+
+***Critères de validation***
+- Le CRUD est généré pour l’entité Article.
+- L’entité Article dispose des actions de lecture, écriture et suppression.
+- Les routes sont cohérentes et fonctionnelles.
+- Le CRUD agit bien avec la BDD (exemple : insérer un article depuis http://localhost:8000/article/new).
+- Le code est disponible sur un dépot GitHub
