@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Category;
+use App\Entity\Tag;
 use App\Form\ArticleSearchType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,7 +16,7 @@ class BlogController extends AbstractController
     /**
      * @Route("/blog", name="blog_index")
      */
-    public function index() : Response
+    public function index(): Response
     {
         $articles = $this->getDoctrine()
             ->getRepository(Article::class)
@@ -44,7 +45,7 @@ class BlogController extends AbstractController
      * @param string $slug
      * @return Response
      */
-    public function show(?string $slug): Response
+    public function showArticles(?string $slug): Response
     {
         if (!$slug) {
             throw $this
@@ -90,5 +91,25 @@ class BlogController extends AbstractController
         $articles = $category->getArticles();
 
         return $this->render('blog/category.html.twig', ['articles' => $articles, 'category' => $category]);
+    }
+
+    /**
+     * @Route("/blog/tag/{name}", name="blog_show_tags")
+     * @param Tag $tag
+     * @return Response
+     */
+    public function showTags(?Tag $tag): Response
+    {
+        if (!$tag) {
+            throw $this
+                ->createNotFoundException('No articles with this tag.');
+        }
+
+        $articles = $tag->getArticles();
+
+        return $this->render('blog/tag.html.twig', [
+            'tag' => $tag,
+            'articles' => $articles,
+        ]);
     }
 }
