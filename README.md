@@ -168,3 +168,22 @@ Une fois le crud créé:
 - Les routes sont cohérentes et fonctionnelles.
 - Le CRUD agit bien avec la BDD (exemple : insérer un article depuis http://localhost:8000/article/new).
 - Le code est disponible sur un dépot GitHub
+
+# quest_symfony_12
+12 - Symfony : Doctrine relations “Many-To-Many”
+
+***Affichage des tags d’un article***
+
+Crée une page, répondant à l'appel de la route /tag/{name} et affichant les informations suivantes :
+- Le nom du tag,
+- La liste des articles associés à ce tag.
+
+***Critères de validation :***
+- Ton code est disponible sur github,
+- Ton entité App\Entity\Tag est bien présente,
+- Ta classe de migration générant les 2 nouvelles tables et les contraintes d'intégrité fonctionnent,
+- La route vers la page de tag est fonctionnelle,
+- Sur la page du tag, la liste des articles associés s'affiche.
+- Sur la page des articles, la liste des tags associés s'affiche.
+- **Bonus :** Sur la page de tag, lors du clic sur un article de la liste, l'utilisateur est redirigé vers la page de l'article sélectionné.
+- **Bonus II :** Sur la page d'article, lors du clic sur un tag de la liste, l'utilisateur est redirigé vers la page du tag sélectionné.
