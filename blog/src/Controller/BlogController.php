@@ -40,7 +40,7 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @Route("/blog/show/{slug}", name="blog_show", defaults={"slug" = null}, requirements={"slug"="[a-z-0-9]*"})
+     * @Route("/blog/show/{slug}", name="blog_show", requirements={"slug"="[a-z-0-9]*"})
      * @param string $slug
      * @return Response
      */
