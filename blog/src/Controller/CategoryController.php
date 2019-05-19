@@ -13,11 +13,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class CategoryController extends AbstractController
 {
     /**
-     * @Route("/category", name="category")
-     * @param Request $request
-     * @return Response
+     * @Route("/category", name="category_index")
      */
-    public function add(Request $request) : Response
+    public function index(Request $request) : Response
     {
         $session = new Session();
 
@@ -39,12 +37,29 @@ class CategoryController extends AbstractController
                 'The category has been successfully added !'
             );
 
-            return $this->redirectToRoute('category');
+            return $this->redirectToRoute('category_index');
         }
 
         return $this->render('category/index.html.twig', [
-            'form' => $form->createView(),
             'categories' => $categories,
+            'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/category/{name}", name="category_show")
+     * @param Category $category
+     * @return Response
+     */
+    public function show(Category $category): Response
+    {
+        if (!$category) {
+            throw $this
+                ->createNotFoundException('No category has been sent to find a category in article\'s table.');
+        }
+
+        $articles = $category->getArticles();
+
+        return $this->render('category/show.html.twig', ['articles' => $articles, 'category' => $category]);
     }
 }

@@ -16,3 +16,16 @@ body {
 a:hover{
     text-decoration: none;
 }
+
+.card-footer{
+    a{
+        font-size: 0.8rem;
+    }
+    a:before{
+        content: '#';
+    }
+}
+
+.tags{
+    font-size: 2rem;
+}

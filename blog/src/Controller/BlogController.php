@@ -45,7 +45,7 @@ class BlogController extends AbstractController
      * @param string $slug
      * @return Response
      */
-    public function showArticles(?string $slug): Response
+    public function showArticle(?string $slug): Response
     {
         if (!$slug) {
             throw $this
@@ -74,42 +74,5 @@ class BlogController extends AbstractController
                 'category' => $category
             ]
         );
-    }
-
-    /**
-     * @Route("/blog/category/{name}", name="blog_show_category")
-     * @param Category $category
-     * @return Response
-     */
-    public function showByCategory(Category $category): Response
-    {
-        if (!$category) {
-            throw $this
-                ->createNotFoundException('No category has been sent to find a category in article\'s table.');
-        }
-
-        $articles = $category->getArticles();
-
-        return $this->render('blog/category.html.twig', ['articles' => $articles, 'category' => $category]);
-    }
-
-    /**
-     * @Route("/blog/tag/{name}", name="blog_tag")
-     * @param Tag $tag
-     * @return Response
-     */
-    public function showTags(?Tag $tag): Response
-    {
-        if (!$tag) {
-            throw $this
-                ->createNotFoundException('No articles with this tag.');
-        }
-
-        $articles = $tag->getArticles();
-
-        return $this->render('blog/tag.html.twig', [
-            'tag' => $tag,
-            'articles' => $articles,
-        ]);
     }
 }

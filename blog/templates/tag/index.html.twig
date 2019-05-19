@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tags{% endblock %}
+
+{% block body %}
+
+    <h1>All tags</h1>
+
+    <div class="tags">
+        {% for tag in tags %}
+            <a href="{{ path('tag_show', {'name' : tag.name}) }}" class="badge badge-pill badge-danger">{{ tag.name }}</a>
+        {% endfor %}
+    </div>
+{% endblock %}

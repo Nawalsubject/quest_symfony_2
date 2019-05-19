@@ -12,10 +12,18 @@
         <div class="card-body">
             <p class="card-text">{{ article.content }}</p>
         </div>
+        <div class="card-footer">
+            {% for tag in article.tags %}
+                <a href="{{ path('tag_show', {'name': tag.name}) }}" class="badge badge-pill badge-danger">{{ tag.name }}</a>
+
+            {% else %}
+                <p class="text-danger m-0">No tags</p>
+            {% endfor %}
+        </div>
     </div>
 
     <a href="{{ path('app_index') }}">
-        <button type="button" class="btn btn-secondary">Back to homepage.</button>
+        <button type="button" class="btn btn-primary">Back to homepage.</button>
     </a>
 
 {% endblock %}
