@@ -4,47 +4,37 @@
 
 {% block body %}
 
-    <h2 class="mb-5 text-center">Add a new category</h2>
-
-<div class="container text-center">
-
-    {% for flashMessage in app.session.flashbag.get('success') %}
-        <div class="alert alert-dismissible alert-success">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <strong>{{ flashMessage }}</strong>
-        </div>
-    {% endfor %}
-
-    <div class="row justify-content-center">
-        {{ form_start(form) }}
-        <div class="col-12">
-            {{ form_widget(form) }}
-        </div>
-        <div class="col-6">
-            <input type="submit" class="btn btn-primary mb-5 ml-5" value="Add">
-        </div>
-        {{ form_end(form) }}
+    <div class="row justify-content-center text-center">
+        <h1 class="mb-4 col-12">Category index</h1>
+        <a class="col-6 btn btn-primary mb-4" href="{{ path('category_new') }}">Create new</a>
     </div>
 
     <table class="table table-hover">
         <thead class="table-danger">
         <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Name</th>
+            <th>Id</th>
+            <th>Name</th>
+            <th>actions</th>
         </tr>
         </thead>
-
+        <tbody>
         {% for category in categories %}
-
-            <tbody>
             <tr>
                 <td>{{ category.id }}</td>
                 <td>{{ category.name }}</td>
+                <td>
+                    <a class="col-3 btn btn-outline-primary"
+                       href="{{ path('category_show', {'id': category.id}) }}">show</a>
+                    <a class="col-3 btn btn-outline-primary"
+                       href="{{ path('category_edit', {'id': category.id}) }}">edit</a>
+                </td>
             </tr>
-            </tbody>
-
+        {% else %}
+            <tr>
+                <td colspan="4">no category found</td>
+            </tr>
         {% endfor %}
-
+        </tbody>
     </table>
 
 {% endblock %}
