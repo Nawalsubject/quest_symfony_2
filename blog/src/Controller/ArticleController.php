@@ -3,12 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\Tag;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 /**
  * @Route("/article")
@@ -49,12 +51,35 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="article_show", methods={"GET"})
+     * @Route("/{id}", name="article_show", requirements={"id"="\d+"}, methods={"GET"})
+     * @param Article $article
+     * @return Response
      */
     public function show(Article $article): Response
     {
         return $this->render('article/show.html.twig', [
             'article' => $article,
+        ]);
+    }
+
+    /**
+     * @Route("/{name}", name="article_showByTag", methods={"GET"})
+     * @ParamConverter("tag", class="App\Entity\Tag")
+     * @param Tag|null $tag
+     * @return Response
+     */
+    public function showByTag(?Tag $tag): Response
+    {
+        if (!$tag) {
+            throw $this
+                ->createNotFoundException('No articles with this tag.');
+        }
+
+        $articles = $tag->getArticles();
+
+        return $this->render('article/showByTag.html.twig', [
+            'tag' => $tag,
+            'articles' => $articles,
         ]);
     }
 

@@ -1,26 +1,26 @@
-{# templates/blog/show.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ tag.name }}{% endblock %}
+{% block title %}Tag{% endblock %}
 
 {% block body %}
+    <h1>Tag</h1>
 
-    <h1 class="mb-4">In {{ tag.name }} tag</h1>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ tag.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ tag.name }}</td>
+            </tr>
+        </tbody>
+    </table>
 
-    {% for article in articles %}
-        <a href="{{ path('article_show', {'id': article.id}) }}">
-            <div class="card my-2">
-                <h5 class="card-header">{{ article.title }}</h5>
-                <div class="card-body">
-                    <p class="card-text">{{ article.content }}</p>
-                </div>
-                <div class="card-footer text-muted">{{ article.category.name }}</div>
-            </div>
-        </a>
-    {% endfor %}
+    <a class="btn btn-outline-primary mb-4" href="{{ path('tag_index') }}">back to list</a>
 
-    <a href="{{ path('app_index') }}">
-        <button type="button" class="btn btn-primary">Back to homepage.</button>
-    </a>
+    <a class="btn btn-outline-primary mb-4" href="{{ path('tag_edit', {'id': tag.id}) }}">edit</a>
 
+    {{ include('tag/_delete_form.html.twig') }}
 {% endblock %}

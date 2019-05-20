@@ -3,43 +3,94 @@
 namespace App\Controller;
 
 use App\Entity\Tag;
+use App\Form\TagType;
+use App\Repository\TagRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("/tag")
+ */
 class TagController extends AbstractController
 {
     /**
-     * @Route("/tag", name="tag_index")
+     * @Route("/", name="tag_index", methods={"GET"})
      */
-    public function index()
+    public function index(TagRepository $tagRepository): Response
     {
-        $tags = $this->getDoctrine()
-            ->getRepository(Tag::class)
-            ->findAll();
-
         return $this->render('tag/index.html.twig', [
-            'tags' => $tags,
+            'tags' => $tagRepository->findAll(),
         ]);
     }
 
     /**
-     * @Route("/tag/{name}", name="tag_show")
-     * @param Tag $tag
-     * @return Response
+     * @Route("/new", name="tag_new", methods={"GET","POST"})
      */
-    public function show(?Tag $tag): Response
+    public function new(Request $request): Response
     {
-        if (!$tag) {
-            throw $this
-                ->createNotFoundException('No articles with this tag.');
+        $tag = new Tag();
+        $form = $this->createForm(TagType::class, $tag);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($tag);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('tag_index');
         }
 
-        $articles = $tag->getArticles();
+        return $this->render('tag/new.html.twig', [
+            'tag' => $tag,
+            'form' => $form->createView(),
+        ]);
+    }
 
+    /**
+     * @Route("/{id}", name="tag_show", methods={"GET"})
+     */
+    public function show(Tag $tag): Response
+    {
         return $this->render('tag/show.html.twig', [
             'tag' => $tag,
-            'articles' => $articles,
         ]);
+    }
+
+    /**
+     * @Route("/{id}/edit", name="tag_edit", methods={"GET","POST"})
+     */
+    public function edit(Request $request, Tag $tag): Response
+    {
+        $form = $this->createForm(TagType::class, $tag);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('tag_index', [
+                'id' => $tag->getId(),
+            ]);
+        }
+
+        return $this->render('tag/edit.html.twig', [
+            'tag' => $tag,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/{id}", name="tag_delete", methods={"DELETE"})
+     */
+    public function delete(Request $request, Tag $tag): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$tag->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($tag);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('tag_index');
     }
 }
