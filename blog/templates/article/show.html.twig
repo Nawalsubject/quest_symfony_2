@@ -25,7 +25,7 @@
     <strong>Tags :</strong>
     <ul>
         {% for tag in article.tags %}
-            <a href="{{ path('tag_show', {'name': tag.name}) }}">
+            <a href="{{ path('article_showByTag', {'name': tag.name}) }}">
                 <li>{{ tag.name }} </li>
             </a>
         {% else %}

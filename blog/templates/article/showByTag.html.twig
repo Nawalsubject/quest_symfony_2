@@ -5,7 +5,7 @@
 
 {% block body %}
 
-    <h1 class="mb-4">In {{ tag.name }} tag</h1>
+    <h1 class="mb-4">In <span class="badge badge-pill badge-danger">{{ tag.name }}</span> tag</h1>
 
     {% for article in articles %}
         <a href="{{ path('article_show', {'id': article.id}) }}">
