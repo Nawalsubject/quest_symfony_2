@@ -47,4 +47,20 @@ class ArticleRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function random() :array
+    {
+        $connection = $this->getEntityManager()->getConnection();
+
+        $sql = '
+        SELECT * FROM article a
+        ORDER BY RAND()
+        LIMIT 1
+        ';
+        $stmt = $connection->prepare($sql);
+        $stmt->execute();
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $stmt->fetch();
+    }
 }

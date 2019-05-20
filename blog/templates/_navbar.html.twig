@@ -29,8 +29,14 @@
                 </div>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('tag_index') }}">All tags</a>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Tags
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ path('tag_index') }}">All tags</a>
+                    <a class="dropdown-item" href="{{ path('tag_new') }}">Add tag</a>
+                </div>
             </li>
         </ul>
     </div>
