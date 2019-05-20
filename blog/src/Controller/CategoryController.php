@@ -50,7 +50,7 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="category_show", methods={"GET"})
+     * @Route("/{id}", name="category_show", requirements={"id"="\d+"}, methods={"GET"})
      */
     public function show(Category $category): Response
     {
@@ -93,5 +93,17 @@ class CategoryController extends AbstractController
         }
 
         return $this->redirectToRoute('category_index');
+    }
+
+    /**
+     * @Route("/{name}", name="category_articles", methods={"GET"})
+     * @param Category $category
+     * @return Response
+     */
+    public function showArticles(Category $category) : Response
+    {
+        return $this->render('category/showArticles.html.twig', [
+            'category' => $category,
+        ]);
     }
 }
