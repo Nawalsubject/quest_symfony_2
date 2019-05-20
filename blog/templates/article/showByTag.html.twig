@@ -6,9 +6,13 @@
 
     <h1 class="mb-4">In <span class="badge badge-pill badge-danger">{{ tag.name }}</span> tag</h1>
 
-    {% for tag in tags %}
-        <span class="badge badge-pill badge-danger">{{ tag.name }}</span>
-    {% endfor %}
+    <p class="text-center my-5"> Other tags :
+        {% for tag in tags %}
+            <a class="tags badge badge-pill badge-danger" href="{{ path('article_showByTag', {'name': tag.name}) }}">
+                {{ tag.name }}
+            </a>
+        {% endfor %}
+    </p>
 
     {% for article in articles %}
         <a href="{{ path('article_show', {'id': article.id}) }}">

@@ -76,9 +76,13 @@ class ArticleController extends AbstractController
         }
 
         $articles = $tag->getArticles();
+        $tags = $this->getDoctrine()
+            ->getRepository(Tag::class)
+            ->findAll();
 
         return $this->render('article/showByTag.html.twig', [
             'tag' => $tag,
+            'tags' => $tags,
             'articles' => $articles,
         ]);
     }
@@ -110,7 +114,7 @@ class ArticleController extends AbstractController
      */
     public function delete(Request $request, Article $article): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$article->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $article->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($article);
             $entityManager->flush();
