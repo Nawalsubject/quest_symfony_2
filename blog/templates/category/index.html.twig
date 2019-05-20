@@ -9,32 +9,37 @@
         <a class="col-6 btn btn-primary mb-4" href="{{ path('category_new') }}">Create new</a>
     </div>
 
-    <table class="table table-hover">
-        <thead class="table-danger">
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for category in categories %}
+    <div class="row justify-content-center">
+
+        <table class="col-6 ml-md-5 table table-responsive table-hover text-dark align-self-center">
+            <thead class="bg-danger">
             <tr>
-                <td>{{ category.id }}</td>
-                <td>{{ category.name }}</td>
-                <td>
-                    <a class="col-3 btn btn-outline-primary"
-                       href="{{ path('category_show', {'id': category.id}) }}">show</a>
-                    <a class="col-3 btn btn-outline-primary"
-                       href="{{ path('category_edit', {'id': category.id}) }}">edit</a>
-                </td>
+                <th>Id</th>
+                <th>Name</th>
+                <th>actions</th>
             </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no category found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for category in categories %}
+                <tr>
+                    <td>{{ category.id }}</td>
+                    <td>{{ category.name }}</td>
+                    <td>
+                        <a class="btn btn-outline-primary mb-1 "
+                           href="{{ path('category_show', {'id': category.id}) }}">show</a>
+                        <a class="btn btn-outline-primary mb-1"
+                           href="{{ path('category_edit', {'id': category.id}) }}">edit</a>
+                        {{ include('category/_delete_form.html.twig') }}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">no category found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
 
 {% endblock %}

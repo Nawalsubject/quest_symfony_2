@@ -9,30 +9,32 @@
         <a class="col-6 btn btn-primary mb-4" href="{{ path('tag_new') }}">Create new</a>
     </div>
 
-    <table class="table">
-        <thead>
+    <div class="row justify-content-center">
+        <table class="col-6 ml-md-5 table table-responsive table-hover text-dark align-self-center">
+            <thead class="bg-danger">
             <tr>
                 <th>Id</th>
                 <th>Name</th>
                 <th>actions</th>
             </tr>
-        </thead>
-        <tbody>
-        {% for tag in tags %}
-            <tr>
-                <td>{{ tag.id }}</td>
-                <td>{{ tag.name }}</td>
-                <td>
-                    <a class="col-3 btn btn-outline-primary" href="{{ path('tag_show', {'id': tag.id}) }}">show</a>
-                    <a class="col-3 btn btn-outline-primary" href="{{ path('tag_edit', {'id': tag.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
+            </thead>
+            <tbody>
+            {% for tag in tags %}
+                <tr>
+                    <td>{{ tag.id }}</td>
+                    <td>{{ tag.name }}</td>
+                    <td>
+                        <a class="btn btn-outline-primary mb-1" href="{{ path('tag_show', {'id': tag.id}) }}">show</a>
+                        <a class="btn btn-outline-primary mb-1" href="{{ path('tag_edit', {'id': tag.id}) }}">edit</a>
+                        {{ include('tag/_delete_form.html.twig') }}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
