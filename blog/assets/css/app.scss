@@ -18,16 +18,20 @@ a:hover{
 }
 
 .card-footer{
-    a{
-        font-size: 0.8rem;
-    }
     a:before{
         content: '#';
     }
 }
 
+.card-header{
+    color: black;
+}
+
 .tags{
     font-size: 1rem;
+    &:before{
+        content: '#';
+    }
 }
 
 .articleOfTheMonth{

@@ -20,7 +20,7 @@
             </div>
             <div class="card-footer">
                 {% for tag in article.tags %}
-                    <a href="{{ path('article_showByTag', {'name': tag.name}) }}" class="badge badge-pill badge-danger">{{ tag.name }}</a>
+                    <a href="{{ path('article_showByTag', {'name': tag.name}) }}" class="tags badge badge-pill badge-danger">{{ tag.name }}</a>
 
                 {% else %}
                     <p class="text-danger m-0">No tags</p>
