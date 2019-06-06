@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Article;
 use App\Entity\Tag;
 use App\Form\ArticleType;
@@ -12,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Route("/article")
@@ -120,6 +122,18 @@ class ArticleController extends AbstractController
      */
     public function edit(Request $request, Article $article, Slugify $slugify): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        /** @var User $user */
+        $user = $this->getUser();
+
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            if ($article->getAuthor()->getId() !== $user->getId()) {
+                throw $this->createAccessDeniedException('YOU SHOULD NOT PASS');
+            }
+        }
+
+
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
 

@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Route("/category")
@@ -28,6 +29,7 @@ class CategoryController extends AbstractController
 
     /**
      * @Route("/new", name="category_new", methods={"GET","POST"})
+     * @IsGranted("ROLE_ADMIN", message="No access! Get out!")
      */
     public function new(Request $request): Response
     {
@@ -86,7 +88,7 @@ class CategoryController extends AbstractController
      */
     public function delete(Request $request, Category $category): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $category->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($category);
             $entityManager->flush();
@@ -100,7 +102,7 @@ class CategoryController extends AbstractController
      * @param Category $category
      * @return Response
      */
-    public function showArticles(Category $category) : Response
+    public function showArticles(Category $category): Response
     {
         return $this->render('category/showArticles.html.twig', [
             'category' => $category,

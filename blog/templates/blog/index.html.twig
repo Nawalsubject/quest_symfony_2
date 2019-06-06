@@ -17,14 +17,25 @@
             <div class="card-body">
                 <h5 class="card-title">Category : {{ article.category.name }}</h5>
                 <p class="card-text">{{ article.content }}</p>
+                {% if article.author is defined %}
+                    <footer class="blockquote-footer">Author: <cite
+                                title="Source Title">{{ article.author.email }}</cite></footer>
+                {% endif %}
             </div>
             <div class="card-footer">
                 {% for tag in article.tags %}
-                    <a href="{{ path('article_showByTag', {'name': tag.name}) }}" class="tags badge badge-pill badge-danger">{{ tag.name }}</a>
+                    <a href="{{ path('article_showByTag', {'name': tag.name}) }}"
+                       class="tags badge badge-pill badge-danger mt-2">{{ tag.name }}</a>
 
                 {% else %}
                     <p class="text-danger m-0">No tags</p>
                 {% endfor %}
+                <div class="float-right edit-author">
+                    {% if is_granted('ROLE_AUTHOR') %}
+                        <a href="{{ path('article_edit', { 'id': article.id} ) }}"
+                           class="btn btn-outline-primary">Edit</a>
+                    {% endif %}
+                </div>
             </div>
         </div>
     {% else %}
@@ -33,9 +44,11 @@
 
     <div class="row">
 
-    <div class="col-12 my-2">
-    <a href="{{ path('app_index') }}"><button type="button" class="btn btn-primary">Back to homepage.</button></a>
-    </div>
+        <div class="col-12 my-2">
+            <a href="{{ path('app_index') }}">
+                <button type="button" class="btn btn-primary">Back to homepage.</button>
+            </a>
+        </div>
 
     </div>
 {% endblock %}

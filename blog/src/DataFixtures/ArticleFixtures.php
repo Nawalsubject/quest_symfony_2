@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Article;
 use App\Service\Slugify;
+use App\Entity\User;
 use Faker;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -27,6 +28,7 @@ class ArticleFixtures extends Fixture implements DependentFixtureInterface
             $article->setTitle(mb_strtolower($faker->catchPhrase()));
             $article->setSlug($slugify->generate($article->getTitle()));
             $article->setContent($faker->realText());
+            $article->setAuthor($this->getReference('user_' . rand(0,1)));
             $article->setCategory($this->getReference('category_' . rand(0,6)));
             $nbRandom = rand(0, 3);
             for ($j = 0; $j <= $nbRandom; $j++) {

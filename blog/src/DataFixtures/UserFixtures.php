@@ -20,6 +20,7 @@ class UserFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $author = new User();
+        $this->addReference('user_0',$author);
         $author->setEmail('author@gmail.com');
         $author->setRoles(['ROLE_AUTHOR']);
         $author->setPassword($this->passwordEncoder->encodePassword(
@@ -30,6 +31,7 @@ class UserFixtures extends Fixture
         $manager->persist($author);
 
         $admin = new User();
+        $this->addReference('user_1',$author);
         $admin->setEmail('admin@gmail.com');
         $admin->setRoles(['ROLE_ADMIN']);
         $admin->setPassword($this->passwordEncoder->encodePassword(
