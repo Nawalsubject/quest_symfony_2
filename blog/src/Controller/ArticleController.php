@@ -22,6 +22,7 @@ class ArticleController extends AbstractController
 {
     /**
      * @Route("/", name="article_index", methods={"GET"})
+     * @IsGranted("ROLE_ADMIN")
      * @param ArticleRepository $articleRepository
      * @return Response
      */
@@ -34,6 +35,7 @@ class ArticleController extends AbstractController
 
     /**
      * @Route("/new", name="article_new", methods={"GET","POST"})
+     * @IsGranted("ROLE_AUTHOR")
      * @param Request $request
      * @param Slugify $slugify
      * @return Response
@@ -155,6 +157,7 @@ class ArticleController extends AbstractController
 
     /**
      * @Route("/{id}", name="article_delete", methods={"DELETE"})
+     * @IsGranted("ROLE_ADMIN")
      * @param Request $request
      * @param Article $article
      * @return Response
