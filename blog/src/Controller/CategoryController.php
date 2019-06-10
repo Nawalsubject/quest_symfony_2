@@ -42,6 +42,8 @@ class CategoryController extends AbstractController
             $entityManager->persist($category);
             $entityManager->flush();
 
+            $this->addFlash('success', 'The categiry has been created successfully');
+
             return $this->redirectToRoute('category_index');
         }
 
@@ -71,11 +73,13 @@ class CategoryController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $this->addFlash('success', 'The category has been edited successfully');
 
             return $this->redirectToRoute('category_index', [
                 'id' => $category->getId(),
             ]);
         }
+
 
         return $this->render('category/edit.html.twig', [
             'category' => $category,
@@ -92,7 +96,9 @@ class CategoryController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($category);
             $entityManager->flush();
+            $this->addFlash('danger', 'The category has been deleted successfully');
         }
+
 
         return $this->redirectToRoute('category_index');
     }

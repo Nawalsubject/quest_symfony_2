@@ -18,6 +18,16 @@
         {% include '_navbar.html.twig' %}
     </header>
     <div class="container justify-content-center py-5">
+
+        {% for category, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-dismissible alert-{{ category }} col-12 text-center">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+
         {% block body %}{% endblock %}
         <!-- ... -->
 
