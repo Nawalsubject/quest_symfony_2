@@ -24,9 +24,9 @@ class ArticleRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('a')
             ->innerJoin('a.category', 'c' )
             ->addSelect('c')
-            ->innerJoin('a.tags', 't' )
+            ->leftJoin('a.tags', 't' )
             ->addSelect('t')
-            ->innerJoin('a.author', 'author' )
+            ->leftJoin('a.author', 'author' )
             ->addSelect('author')
             ->getQuery();
 
