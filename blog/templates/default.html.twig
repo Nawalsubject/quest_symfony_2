@@ -17,8 +17,8 @@
         <div class="card-body">
             <h5 class="card-title">Category : {{ category.name }}</h5>
             <p class="card-text">{{ article.content }}</p>
-            {% if article.author.email is defined %}
-                <footer class="blockquote-footer">Author: <cite title="Source Title">{{ article.author.email }}</cite>
+            {% if author %}
+                <footer class="blockquote-footer">Author: <cite title="Source Title">{{ author.username }}</cite>
                 </footer>
             {% endif %}
         </div>

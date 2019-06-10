@@ -24,13 +24,14 @@ class DefaultController extends AbstractController
             ->find($article['id']);
 
         $tags = $article->getTags();
-
+        $author = $article->getAuthor();
         $category = $article->getCategory();
 
         return $this->render('/default.html.twig', [
             'article' => $article,
             'tags' => $tags,
             'category' => $category,
+            'author' => $author,
         ]);
     }
 }
