@@ -23,15 +23,8 @@ class DefaultController extends AbstractController
             ->getRepository(Article::class)
             ->find($article['id']);
 
-        $tags = $article->getTags();
-        $author = $article->getAuthor();
-        $category = $article->getCategory();
-
         return $this->render('/default.html.twig', [
             'article' => $article,
-            'tags' => $tags,
-            'category' => $category,
-            'author' => $author,
         ]);
     }
 }
