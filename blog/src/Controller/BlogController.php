@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Form\ArticleSearchType;
+use App\Repository\ArticleRepository;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,11 +17,9 @@ class BlogController extends AbstractController
     /**
      * @Route("/blog", name="blog_index")
      */
-    public function index(SessionInterface $session): Response
+    public function index(SessionInterface $session, Request $request, ArticleRepository $articleRepository): Response
     {
-        $articles = $this->getDoctrine()
-            ->getRepository(Article::class)
-            ->findAllWithCategoriesTagsAuthor();
+        $articles = $articleRepository->findAllWithCategoriesTagsAuthor();
 
         if (!$articles) {
             throw $this->createNotFoundException(
@@ -27,11 +27,17 @@ class BlogController extends AbstractController
             );
         }
 
+        $data= [];
         $form = $this->createForm(
             ArticleSearchType::class,
-            null,
-            ['method' => Request::METHOD_GET]
-        );
+            $data);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+//            $articles = $articleRepository->findByTitle($data['searchField']);
+            $articles = $articleRepository->searchByInput($data['searchField']);
+        }
 
         return $this->render('blog/index.html.twig', [
             'articles' => $articles,
@@ -73,5 +79,28 @@ class BlogController extends AbstractController
                 'category' => $category
             ]
         );
+    }
+
+    /**
+     * @Route("/{id}/favorite", name="blog_favorite", methods={"GET","POST"})
+     * @param Request $request
+     * @param Article $article
+     * @param ObjectManager $manager
+     * @return Response
+     */
+    public function favorite(Request $request, Article $article, ObjectManager $manager): Response
+    {
+        if ($this->getUser()->getFavorites()->contains($article)) {
+            $this->getUser()->removeFavorite($article)   ;
+        }
+        else {
+            $this->getUser()->addFavorite($article);
+        }
+
+        $manager->flush();
+
+        return $this->json([
+            'isFavorite' => $this->getUser()->isFavorite($article)
+        ]);
     }
 }

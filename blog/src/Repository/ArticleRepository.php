@@ -33,34 +33,26 @@ class ArticleRepository extends ServiceEntityRepository
         return $qb->execute();
     }
 
-    // /**
-    //  * @return Article[] Returns an array of Article objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+      * @return Article[] Returns an array of Article objects
+      */
+
+    public function searchByInput($input)
     {
         return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('a.id', 'ASC')
-            ->setMaxResults(10)
+            ->innerJoin('a.category', 'c' )
+            ->addSelect('c')
+            ->leftJoin('a.tags', 't' )
+            ->addSelect('t')
+            ->leftJoin('a.author', 'author' )
+            ->addSelect('author')
+            ->Where('a.title LIKE :input')
+            ->setParameter('input', "%$input%")
+            ->orderBy('a.title', 'ASC')
             ->getQuery()
             ->getResult()
         ;
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Article
-    {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 
     public function random() :array
     {
