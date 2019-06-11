@@ -30,6 +30,15 @@
                 {% else %}
                     <p class="text-danger m-0">No tags</p>
                 {% endfor %}
+                <a onclick="addToFavorite({{ path('article_favorite', {'id': article.id}) }}, {{ article.id }})">
+                    {% if app.user %}
+                    {% if app.user.isFavorite(article) %}
+                    <i id="favorite{{ article.id }}" class="fas fa-heart"></i>
+                    {% else %}
+                    <i id="favorite{{ article.id }}" class="far fa-heart"></i>
+                        {% endif %}
+                {% endif %}
+                </a>
                 <div class="float-right edit-author">
                     {% if is_granted('ROLE_AUTHOR') %}
                         <a href="{{ path('article_edit', { 'id': article.id} ) }}"
@@ -51,4 +60,24 @@
         </div>
 
     </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        function addToFavorite(url, articleId) {
+            fetch(url)
+                .then(response => response.json())
+                .then(json => {
+                    let favoriteElt = document.getElementById('favorite'+articleId);
+                    if (json.isFavorite) {
+                        favoriteElt.classList.remove('far');
+                        favoriteElt.classList.add('fas');
+                    }
+                    else {
+                        favoriteElt.classList.remove('fas');
+                        favoriteElt.classList.add('far');
+                    }
+                });
+        }
+    </script>
 {% endblock %}

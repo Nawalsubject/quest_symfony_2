@@ -12,7 +12,7 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class ArticleFixtures extends Fixture
+class ArticleFixtures extends Fixture implements DependentFixtureInterface
 {
     /**
      * @var Slugify
@@ -28,10 +28,10 @@ class ArticleFixtures extends Fixture
         $this->slugify = $slugify;
     }
 
-/*    public function getDependencies()
+    public function getDependencies()
     {
-        return [CategoryFixtures::class];
-    }*/
+        return [UserFixtures::class];
+    }
 
     public function load(ObjectManager $manager)
     {
@@ -67,7 +67,7 @@ class ArticleFixtures extends Fixture
             $article->setContent("article " . $i . " content");
             $article->setCategory($category);
             $article->addTag($tag);
-            $article->setAuthor(null);
+            $article->setAuthor($this->getReference('user_' . rand(0, 1)));
             $manager->persist($article);
         }
 
