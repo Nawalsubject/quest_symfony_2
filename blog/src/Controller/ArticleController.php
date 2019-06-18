@@ -36,7 +36,7 @@ class ArticleController extends AbstractController
 
     /**
      * @Route("/new", name="article_new", methods={"GET","POST"})
-     * @IsGranted("ROLE_AUTHOR")
+     * @IsGranted("ROLE_USER")
      * @param Request $request
      * @param Slugify $slugify
      * @return Response
